@@ -1,74 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - CAL Bank</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 50%;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-group input[type="text"],
-        .form-group input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .form-group input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 15px 20px;
-            cursor: pointer;
-        }
-        .form-group input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
+<?php
+// Données de connexion (à des fins de démonstration uniquement, ne pas utiliser en production)
+$identifiant_valide = "ivega01";
+$mot_de_passe_valide = "86226800";
 
-<div class="container">
-    <h1>Connexion à CAL Bank</h1>
-    <form action="process_login.php" method="POST">
-        <div class="form-group">
-            <label for="username">Identifiant:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Se connecter">
-        </div>
-    </form>
-</div>
+// Vérification des données postées depuis le formulaire
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $identifiant = $_POST["username"];
+    $mot_de_passe = $_POST["password"];
 
-</body>
-</html>
+    // Vérification de l'identifiant et du mot de passe
+    if ($identifiant === $identifiant_valide && $mot_de_passe === $mot_de_passe_valide) {
+        // Identifiants corrects, rediriger vers la page d'accueil du compte
+        header("Location: compte.php");
+        exit;
+    } else {
+        // Identifiants incorrects, afficher un message d'erreur
+        echo "Identifiant ou mot de passe incorrect.";
+    }
+}
+?>
